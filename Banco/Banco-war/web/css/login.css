@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+/*
+$color: #999;
+$color-bg: #ffffff;
+
+$font-family: sans-serif;
+$font-size: 16px;
+$font-weight: 400;
+
+$line-height: 1.5em;*/
+
+#login-form input {
+    font-size: 14px;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+    border: 1px solid #dcdcdc;
+    padding: 12px 10px;
+    width: 91%;
+}
+
+#login-form input[type="text"] {
+    border-radius: 3px 3px 0 0;
+}
+
+#login-form input[type="password"] {
+    border-top: none;
+    border-radius: 0px 0px 3px 3px;
+}
+
+#login-form input[type="submit"] {
+    background: #1dabb8;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 12px 20px;
+}
+
+#login-form input[type="submit"]:hover { background: #198d98; }
