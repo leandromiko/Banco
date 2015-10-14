@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.model.rmi;
 
 import com.br.lp3.model.entities.Userlp3;
@@ -15,12 +10,14 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author 31506976
+ * @author Leandro Meneguzzi 3144893-3
+ * @author Lucas Gianfrancesco 3147173-0
+ * @author Pedro Morelatto 3142463-5
  */
 public class UserDAO extends UnicastRemoteObject implements GenericDAO<Userlp3> {
-    
-    public UserDAO() throws RemoteException{
-        
+
+    public UserDAO() throws RemoteException {
+
     }
 
     @Override
@@ -29,7 +26,7 @@ public class UserDAO extends UnicastRemoteObject implements GenericDAO<Userlp3> 
     }
 
     @Override
-    public List read() throws RemoteException{
+    public List read() throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BancoDBPU");
         EntityManager em = emf.createEntityManager();
 
@@ -44,7 +41,7 @@ public class UserDAO extends UnicastRemoteObject implements GenericDAO<Userlp3> 
     }
 
     @Override
-    public boolean update(Userlp3 t) throws RemoteException{
+    public boolean update(Userlp3 t) throws RemoteException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("BancoDBPU");
         EntityManager em = emf.createEntityManager();
 
@@ -60,7 +57,7 @@ public class UserDAO extends UnicastRemoteObject implements GenericDAO<Userlp3> 
     }
 
     @Override
-    public boolean delete(Userlp3 t) throws RemoteException{
+    public boolean delete(Userlp3 t) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

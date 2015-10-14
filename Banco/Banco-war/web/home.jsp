@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,16 +21,9 @@
             </div>
         </div>
         <style>
-            #verde{
-                background: #658f25;
-                float: left;
-            }
+            #verde{background: #658f25;float: left;}
             #verde:hover{background: #658f25;}
-            button{
-                font-size:14px;
-                width:100%;
-                height:30px;
-            }
+            button{font-size:14px;width:100%;height:30px;}
             #vermelho{float:right;}
         </style>
         <c:if test="${param.saque=='true'}"><script>alert('SAQUE EFETUADO COM SUCESSO');</script></c:if>

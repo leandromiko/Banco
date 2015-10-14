@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -30,11 +29,7 @@
                 </fieldset>
             </div>
         </div>
-        <c:if test="${param.transfer=='false'}">
-            <script>alert('VALOR INVÁLIDO');</script>
-        </c:if>
-        <c:if test="${param.user=='false'}">
-            <script>alert('USUÁRIO INVÁLIDO');</script>
-        </c:if>
+        <c:if test="${param.transfer=='false'}"><script>alert('VALOR INVÁLIDO');</script></c:if>
+        <c:if test="${param.user=='false'}"><script>alert('USUÁRIO INVÁLIDO');</script></c:if>
     </body>
 </html>

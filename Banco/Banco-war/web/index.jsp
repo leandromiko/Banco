@@ -1,9 +1,8 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <c:if test="${isLogged}" >
             <c:redirect url="/home.jsp"></c:redirect>
@@ -27,8 +26,6 @@
                 </fieldset>
             </div>
         </div>
-        <c:if test="${param.login=='false'}">
-            <script>alert('LOGIN INVÁLIDO');</script>
-        </c:if>
+        <c:if test="${param.login=='false'}"><script>alert('LOGIN INVÁLIDO');</script></c:if>
     </body>
 </html>
