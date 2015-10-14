@@ -3,6 +3,7 @@ package com.br.lp3.model.controller;
 import com.br.lp3.model.entities.Userlp3;
 import com.br.lp3.model.rmi.LoginManagerLocal;
 import com.br.lp3.model.rmi.OperacoesManagerLocal;
+import com.br.lp3.model.utilities.LogWriter;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class FrontController extends HttpServlet {
     private String command;
     private Userlp3 user;
     private HttpSession session;
+    private LogWriter log;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,6 +43,7 @@ public class FrontController extends HttpServlet {
 
         command = request.getParameter("command");
         session = request.getSession();
+        log = LogWriter.getInstance();
 
         if (command != null) {
             switch (command) {
@@ -49,6 +52,7 @@ public class FrontController extends HttpServlet {
                     session.setAttribute("user", user);
                     session.setAttribute("saldo", user != null ? operacoesManager.getSaldo(user.getIdUser()) : null);
                     session.setAttribute("isLogged", (user != null));
+                    log.logWriter(user);
                     response.sendRedirect(user != null ? "home.jsp" : "index.jsp?login=false");
                     break;
                 case "transferencia":
@@ -93,6 +97,7 @@ public class FrontController extends HttpServlet {
             }
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
