@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.br.lp3.model.controller;
 
 import com.br.lp3.model.entities.Userlp3;
@@ -18,7 +13,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author 31506976
+ * @author Leandro Meneguzzi 3144893-3
+ * @author Lucas Gianfrancesco 3147173-0
+ * @author Pedro Morelatto 3142463-5
+ *
  */
 public class FrontController extends HttpServlet {
 
@@ -50,15 +48,30 @@ public class FrontController extends HttpServlet {
                 case "login":
                     user = loginManager.authorize(request.getParameter("login"), request.getParameter("senha"));
                     session.setAttribute("user", user);
+                    session.setAttribute("saldo", user != null ? operacoesManager.getSaldo(user.getIdUser()) : null);
                     session.setAttribute("isLogged", (user != null));
                     response.sendRedirect(user != null ? "home.jsp" : "index.jsp?login=false");
-                    break;
-                case "saldo":
-                    response.sendRedirect("saldo.jsp");
                     break;
                 case "transferencia":
                     session.setAttribute("listaUsuarios", loginManager.buscarUsuarios());
                     response.sendRedirect("transferencia.jsp");
+                    break;
+                case "realizarTransferencia":
+                    if (request.getParameter("user").isEmpty()) {
+                        response.sendRedirect("transferencia.jsp?user=false");
+                    } else {
+                        Userlp3 receiver = loginManager.buscarUsuario(Integer.parseInt(request.getParameter("user")));
+                        Userlp3 giver = (Userlp3) session.getAttribute("user");
+                        double value = Integer.parseInt(request.getParameter("valor"));
+
+                        if (giver.getSaldo() < value || value < 0) {
+                            response.sendRedirect("transferencia.jsp?transfer=false");
+                        } else {
+                            operacoesManager.transferencia(giver.getIdUser(), receiver.getIdUser(), value);
+                            session.setAttribute("saldo", operacoesManager.getSaldo(giver.getIdUser()));
+                            response.sendRedirect("transferencia.jsp?transfer=true");
+                        }
+                    }
                     break;
                 case "saque":
                     response.sendRedirect("saque.jsp");
@@ -74,9 +87,12 @@ public class FrontController extends HttpServlet {
                         response.sendRedirect("saque.jsp");
                     }
                     break;
+                case "logout":
+                    session.invalidate();
+                    response.sendRedirect("index.jsp");
+                    break;
             }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

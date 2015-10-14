@@ -16,13 +16,11 @@
                 <fieldset>
                     <a href="FrontController?command=transferencia"><button>Transferencia</button></a><br/><br/>
                     <a href="FrontController?command=saque"><button>Saque</button></a><br/><br/>
-                    <label id="verde">Saldo: ${user.getSaldo()}</label>
+                    <label id="verde">Saldo: ${saldo}</label>
                     <a href="FrontController?command=logout"><input id="vermelho" type="submit" value="Logout"></a> 
                 </fieldset>
             </div>
         </div>
-                    <script>
-                    </script>
         <style>
             #verde{
                 background: #658f25;

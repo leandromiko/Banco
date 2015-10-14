@@ -32,8 +32,23 @@ public class OperacoesManager implements OperacoesManagerLocal {
     }
 
     @Override
-    public boolean transferencia(int payerId, int reciverId, double value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean transferencia(int payerId, int receiverId, double value) {
+        Userlp3 payer = loginManager.buscarUsuario(payerId);
+        Userlp3 receiver = loginManager.buscarUsuario(receiverId);
+        if (value > 0 || value < payer.getSaldo()) {
+            payer.setSaldo(payer.getSaldo() - value);
+            receiver.setSaldo(receiver.getSaldo() + value);
+        }
+        try {
+            Registry registro = LocateRegistry.getRegistry("localhost", 1099);
+            GenericDAO servico = (GenericDAO) registro.lookup("UserDAO");
+            servico.update(payer);
+            servico.update(receiver);
+            return true;
+        } catch (RemoteException | NotBoundException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override

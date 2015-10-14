@@ -27,5 +27,8 @@
                 </fieldset>
             </div>
         </div>
+        <c:if test="${param.login=='false'}">
+            <script>alert('LOGIN INVÁLIDO');</script>
+        </c:if>
     </body>
 </html>
