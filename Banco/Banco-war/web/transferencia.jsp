@@ -17,8 +17,10 @@
                     <form action="FrontController?command=realizarTransferencia" method="post">
                         <select name="user" id="transfer">
                             <option value=""> ------------------- Selecione ------------------- </option>
-                            <c:forEach var="user" items="${listaUsuarios}">
-                                <option value="${user.getIdUser()}" >${user.getUsername()}</option>
+                            <c:forEach var="user2" items="${listaUsuarios}">
+                                <c:if test="${user2.getIdUser()!=user.getIdUser()}">
+                                    <option value="${user2.getIdUser()}" >${user2.getUsername()}</option>
+                                </c:if>
                             </c:forEach>
                         </select><br><br>
                         <input name="valor" id="transfer" type="number" placeholder="Valor" autofocus value="" required>
@@ -33,9 +35,6 @@
         </c:if>
         <c:if test="${param.user=='false'}">
             <script>alert('USUÁRIO INVÁLIDO');</script>
-        </c:if>
-        <c:if test="${param.transfer=='true'}">
-            <script>alert('TRANSFERÊNCIA REALIZADA COM SUCESSO');</script>
         </c:if>
     </body>
 </html>

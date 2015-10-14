@@ -57,11 +57,11 @@ public class FrontController extends HttpServlet {
                     response.sendRedirect("transferencia.jsp");
                     break;
                 case "realizarTransferencia":
+                    Userlp3 giver = (Userlp3) session.getAttribute("user");
                     if (request.getParameter("user").isEmpty()) {
                         response.sendRedirect("transferencia.jsp?user=false");
                     } else {
                         Userlp3 receiver = loginManager.buscarUsuario(Integer.parseInt(request.getParameter("user")));
-                        Userlp3 giver = (Userlp3) session.getAttribute("user");
                         double value = Integer.parseInt(request.getParameter("valor"));
 
                         if (giver.getSaldo() < value || value < 0) {
@@ -69,7 +69,7 @@ public class FrontController extends HttpServlet {
                         } else {
                             operacoesManager.transferencia(giver.getIdUser(), receiver.getIdUser(), value);
                             session.setAttribute("saldo", operacoesManager.getSaldo(giver.getIdUser()));
-                            response.sendRedirect("transferencia.jsp?transfer=true");
+                            response.sendRedirect("home.jsp?transfer=true");
                         }
                     }
                     break;
@@ -80,11 +80,11 @@ public class FrontController extends HttpServlet {
                     double valor = Double.parseDouble(request.getParameter("valor"));
                     user = (Userlp3) session.getAttribute("user");
                     if (operacoesManager.saque(user.getIdUser(), valor)) {
-                        user.setSaldo(operacoesManager.getSaldo(user.getIdUser()));
                         session.setAttribute("user", user);
-                        response.sendRedirect("home.jsp");
+                        session.setAttribute("saldo", operacoesManager.getSaldo(user.getIdUser()));
+                        response.sendRedirect("home.jsp?saque=true");
                     } else {
-                        response.sendRedirect("saque.jsp");
+                        response.sendRedirect("saque.jsp?saque=false");
                     }
                     break;
                 case "logout":

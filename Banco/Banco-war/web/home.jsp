@@ -34,5 +34,7 @@
             }
             #vermelho{float:right;}
         </style>
+        <c:if test="${param.saque=='true'}"><script>alert('SAQUE EFETUADO COM SUCESSO');</script></c:if>
+        <c:if test="${param.transfer=='true'}"><script>alert('TRANSFERÊNCIA REALIZADA COM SUCESSO');</script></c:if>
     </body>
 </html>
