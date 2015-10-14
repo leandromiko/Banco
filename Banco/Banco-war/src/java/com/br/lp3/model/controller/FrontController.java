@@ -79,7 +79,7 @@ public class FrontController extends HttpServlet {
                 case "realizarSaque":
                     double valor = Double.parseDouble(request.getParameter("valor"));
                     user = (Userlp3) session.getAttribute("user");
-                    if (operacoesManager.saque(user.getIdUser(), valor)) {
+                    if (operacoesManager.saque(user.getIdUser(), valor)&&valor>0) {
                         session.setAttribute("user", user);
                         session.setAttribute("saldo", operacoesManager.getSaldo(user.getIdUser()));
                         response.sendRedirect("home.jsp?saque=true");

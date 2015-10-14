@@ -54,7 +54,7 @@ public class OperacoesManager implements OperacoesManagerLocal {
     @Override
     public boolean saque(int id, double value) {
         Userlp3 user = loginManager.buscarUsuario(id);
-        if (user != null && user.getSaldo() > value) {
+        if (user != null && user.getSaldo() >= value) {
             user.setSaldo(user.getSaldo() - value);
             try {
                 Registry registro = LocateRegistry.getRegistry("localhost", 1099);
