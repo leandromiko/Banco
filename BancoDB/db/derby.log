@@ -1,18 +1,18 @@
-Wed Oct 14 11:04:59 BRT 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Wed Oct 14 16:17:44 BRT 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Wed Oct 14 11:05:00 BRT 2015:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0150-66ab-1591-ffff87052fe5
-no diretório de banco de dados C:\Temp\Banco\BancoDB\db\bancoDB 
+Wed Oct 14 16:17:45 BRT 2015:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0150-67c9-6b39-00005f193ed6
+no diretório de banco de dados D:\Bibliotecas\Documentos\NetBeansProjects\Banco\BancoDB\db\bancoDB 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_40-b26
-user.dir=C:\Program Files\GlassFish_Server\javadb
-os.name=Windows 7
+user.dir=C:\Program Files\glassfish-4.1\javadb
+os.name=Windows 8.1
 os.arch=amd64
-os.version=6.1
-derby.system.home=C:\Temp\Banco\BancoDB\db
+os.version=6.3
+derby.system.home=D:\Bibliotecas\Documentos\NetBeansProjects\Banco\BancoDB\db
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-Wed Oct 14 11:05:01 BRT 2015 Thread[DRDAConnThread_2,5,main] (XID = 837), (SESSIONID = 0), (DATABASE = bancoDB), (DRDAID = {1}), Cleanup action starting
+Wed Oct 14 16:17:45 BRT 2015 Thread[DRDAConnThread_2,5,main] (XID = 880), (SESSIONID = 0), (DATABASE = bancoDB), (DRDAID = {1}), Cleanup action starting
 java.sql.SQLNonTransientConnectionException: Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -62,4 +62,4 @@ java.sql.SQLException: Ocorreu uma falha de autenticação da conexão.  Motivo: Au
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
 ============= end nested exception, level (1) ===========
 Cleanup action completed
-Wed Oct 14 11:05:01 BRT 2015 Thread[DRDAConnThread_2,5,main] (DATABASE = bancoDB), (DRDAID = {1}), Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..
+Wed Oct 14 16:17:45 BRT 2015 Thread[DRDAConnThread_2,5,main] (DATABASE = bancoDB), (DRDAID = {1}), Ocorreu uma falha de autenticação da conexão.  Motivo: Autenticação inválida..

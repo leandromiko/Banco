@@ -5,6 +5,8 @@ import com.br.lp3.model.rmi.LoginManagerLocal;
 import com.br.lp3.model.rmi.OperacoesManagerLocal;
 import com.br.lp3.model.utilities.LogWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +41,7 @@ public class FrontController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Throwable {
 
         command = request.getParameter("command");
         session = request.getSession();
@@ -72,6 +74,7 @@ public class FrontController extends HttpServlet {
                         } else {
                             operacoesManager.transferencia(giver.getIdUser(), receiver.getIdUser(), value);
                             session.setAttribute("saldo", operacoesManager.getSaldo(giver.getIdUser()));
+                            log.logWriter(value, receiver);
                             response.sendRedirect("home.jsp?transfer=true");
                         }
                     }
@@ -85,6 +88,7 @@ public class FrontController extends HttpServlet {
                     if (operacoesManager.saque(user.getIdUser(), valor) && valor > 0) {
                         session.setAttribute("user", user);
                         session.setAttribute("saldo", operacoesManager.getSaldo(user.getIdUser()));
+                        log.logWriter(valor);
                         response.sendRedirect("home.jsp?saque=true");
                     } else {
                         response.sendRedirect("saque.jsp?saque=false");
@@ -92,6 +96,7 @@ public class FrontController extends HttpServlet {
                     break;
                 case "logout":
                     session.invalidate();
+                    log.logWriter();
                     response.sendRedirect("index.jsp");
                     break;
             }
@@ -111,7 +116,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Throwable ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -125,7 +134,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Throwable ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
