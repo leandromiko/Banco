@@ -39,7 +39,7 @@ public class LogWriter implements LogWriterLocal{
 
     @Override
     public void logWriter(Double value, Userlp3 receiver, boolean funfo) throws IOException {
-        texto = (funfo?"\tTransferencia Realizada\tReceptor: " + receiver.getUsername() + "\tQuantia: " + value:"\tTentativa de Transfência inválida");
+        texto = (funfo?"\tTransferencia Realizada\t\tReceptor: " + receiver.getUsername() + "\tQuantia: " + value:"\t\tTentativa de Transfência inválida");
         gravarArq.printf(formatador.format(new Date()) + texto);
         gravarArq.println();
         gravarArq.flush();
@@ -47,7 +47,7 @@ public class LogWriter implements LogWriterLocal{
 
     @Override
     public void logWriter(Double value, boolean funfo) throws IOException {
-        texto = (funfo? "\tSaque Realizado\tQuantia: " + value:"\tTentativa de Saque Invalido\tQuantia: " + value);
+        texto = (funfo? "\tSaque Realizado\t\tQuantia: " + value:"\tTentativa de Saque Invalido\t\tQuantia: " + value);
         gravarArq.printf(formatador.format(new Date()) + texto);
         gravarArq.println();
         gravarArq.flush();
