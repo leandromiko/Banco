@@ -70,11 +70,12 @@ public class FrontController extends HttpServlet {
                         double value = Integer.parseInt(request.getParameter("valor"));
 
                         if (giver.getSaldo() < value || value < 0) {
+                            log.logWriter(value, receiver, false);
                             response.sendRedirect("transferencia.jsp?transfer=false");
                         } else {
                             operacoesManager.transferencia(giver.getIdUser(), receiver.getIdUser(), value);
                             session.setAttribute("saldo", operacoesManager.getSaldo(giver.getIdUser()));
-                            log.logWriter(value, receiver);
+                            log.logWriter(value, receiver, true);
                             response.sendRedirect("home.jsp?transfer=true");
                         }
                     }
@@ -88,9 +89,10 @@ public class FrontController extends HttpServlet {
                     if (operacoesManager.saque(user.getIdUser(), valor) && valor > 0) {
                         session.setAttribute("user", user);
                         session.setAttribute("saldo", operacoesManager.getSaldo(user.getIdUser()));
-                        log.logWriter(valor);
+                        log.logWriter(valor, true);
                         response.sendRedirect("home.jsp?saque=true");
                     } else {
+                        log.logWriter(valor, false);
                         response.sendRedirect("saque.jsp?saque=false");
                     }
                     break;
