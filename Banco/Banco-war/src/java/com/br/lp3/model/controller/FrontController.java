@@ -3,7 +3,8 @@ package com.br.lp3.model.controller;
 import com.br.lp3.model.entities.Userlp3;
 import com.br.lp3.model.rmi.LoginManagerLocal;
 import com.br.lp3.model.rmi.OperacoesManagerLocal;
-import com.br.lp3.model.utilities.LogWriter;
+import com.br.lp3.model.rmi.LogWriter;
+import com.br.lp3.model.rmi.LogWriterLocal;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpSession;
  * @author Pedro Morelatto 3142463-5
  */
 public class FrontController extends HttpServlet {
-
+    @EJB
+    private LogWriterLocal log;
     @EJB
     private OperacoesManagerLocal operacoesManager;
     @EJB
@@ -29,7 +31,6 @@ public class FrontController extends HttpServlet {
     private String command;
     private Userlp3 user;
     private HttpSession session;
-    private LogWriter log;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,8 +46,7 @@ public class FrontController extends HttpServlet {
 
         command = request.getParameter("command");
         session = request.getSession();
-        log = LogWriter.getInstance();
-
+        
         if (command != null) {
             switch (command) {
                 case "login":
