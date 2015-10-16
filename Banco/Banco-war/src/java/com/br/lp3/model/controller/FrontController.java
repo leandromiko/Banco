@@ -69,7 +69,7 @@ public class FrontController extends HttpServlet {
                         Userlp3 receiver = loginManager.buscarUsuario(Integer.parseInt(request.getParameter("user")));
                         double value = Integer.parseInt(request.getParameter("valor"));
 
-                        if (giver.getSaldo() < value || value < 0) {
+                        if (giver.getSaldo() < value || value <= 0) {
                             log.logWriter(value, receiver, false);
                             response.sendRedirect("transferencia.jsp?transfer=false");
                         } else {
