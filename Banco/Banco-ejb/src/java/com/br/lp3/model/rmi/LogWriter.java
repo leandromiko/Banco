@@ -9,7 +9,7 @@ import java.util.Date;
 import javax.ejb.Stateless;
 
 @Stateless
-public class LogWriter implements LogWriterLocal{
+public class LogWriter implements LogWriterLocal {
 
     private static FileWriter arq;
     private static PrintWriter gravarArq;
@@ -28,10 +28,10 @@ public class LogWriter implements LogWriterLocal{
     @Override
     public void logWriter(Userlp3 user) throws IOException {
         formatador = new SimpleDateFormat("dd-MM-yyyy HH-MM-SS");
-        arq = new FileWriter("c:\\Temp\\log " + formatador.format(new Date()) +" "+ (user!=null?user.getUsername():"")+".txt");
+        arq = new FileWriter("c:\\Temp\\log " + formatador.format(new Date()) + " " + (user != null ? user.getUsername() : "") + ".txt");
         gravarArq = new PrintWriter(arq);
         formatador = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
-        texto=(user == null? "\tTentativa de Login Invalidado\t\tUsuario Invalido":"\tLogin Realizado\t\tUsuario: "+user.getUsername());
+        texto = (user == null ? "\tTentativa de Login Inválidado\t\tUsuário Inválido" : "\tLogin Realizado\t\tUsuário: " + user.getUsername());
         gravarArq.printf(formatador.format(new Date()) + texto);
         gravarArq.println();
         gravarArq.flush();
@@ -39,7 +39,7 @@ public class LogWriter implements LogWriterLocal{
 
     @Override
     public void logWriter(Double value, Userlp3 receiver, boolean funfo) throws IOException {
-        texto = (funfo?"\tTransferencia Realizada\t\tReceptor: " + receiver.getUsername() + "\tQuantia: " + value:"\t\tTentativa de Transfência inválida");
+        texto = (funfo ? "\tTransferência Realizada\t\tReceptor: " + receiver.getUsername() + "\tQuantia: " + value : "\tTentativa de Transferência Inválida");
         gravarArq.printf(formatador.format(new Date()) + texto);
         gravarArq.println();
         gravarArq.flush();
@@ -47,7 +47,7 @@ public class LogWriter implements LogWriterLocal{
 
     @Override
     public void logWriter(Double value, boolean funfo) throws IOException {
-        texto = (funfo? "\tSaque Realizado\t\tQuantia: " + value:"\tTentativa de Saque Invalido\t\tQuantia: " + value);
+        texto = (funfo ? "\tSaque Realizado\t\tQuantia: " + value : "\tTentativa de Saque Inválida\t\tQuantia: " + value);
         gravarArq.printf(formatador.format(new Date()) + texto);
         gravarArq.println();
         gravarArq.flush();
