@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.jms.JMSException;
 
 /**
  *
@@ -18,9 +19,9 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class OperacoesManager implements OperacoesManagerLocal {
-
     @EJB
     private LoginManagerLocal loginManager;
+    
 
     @Override
     public double getSaldo(int id) {
@@ -56,7 +57,7 @@ public class OperacoesManager implements OperacoesManagerLocal {
             try {
                 Registry registro = LocateRegistry.getRegistry("localhost", 1099);
                 GenericDAO servico = (GenericDAO) registro.lookup("UserDAO");
-                servico.update(user);
+                servico.update(user);                
                 return true;
             } catch (RemoteException | NotBoundException ex) {
                 Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
