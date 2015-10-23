@@ -3,7 +3,6 @@ package com.br.lp3.model.controller;
 import com.br.lp3.model.entities.Userlp3;
 import com.br.lp3.model.rmi.LoginManagerLocal;
 import com.br.lp3.model.rmi.OperacoesManagerLocal;
-import com.br.lp3.model.rmi.LogWriter;
 import com.br.lp3.model.rmi.LogWriterLocal;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -22,6 +21,7 @@ import javax.servlet.http.HttpSession;
  * @author Pedro Morelatto 3142463-5
  */
 public class FrontController extends HttpServlet {
+    
     @EJB
     private LogWriterLocal log;
     @EJB
@@ -43,7 +43,7 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Throwable {
-
+        
         command = request.getParameter("command");
         session = request.getSession();
         
@@ -68,7 +68,7 @@ public class FrontController extends HttpServlet {
                     } else {
                         Userlp3 receiver = loginManager.buscarUsuario(Integer.parseInt(request.getParameter("user")));
                         double value = Integer.parseInt(request.getParameter("valor"));
-
+                        
                         if (giver.getSaldo() < value || value <= 0) {
                             log.logWriter(value, receiver, false);
                             response.sendRedirect("transferencia.jsp?transfer=false");
@@ -104,7 +104,6 @@ public class FrontController extends HttpServlet {
             }
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

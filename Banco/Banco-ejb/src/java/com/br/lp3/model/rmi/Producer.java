@@ -5,24 +5,15 @@
  */
 package com.br.lp3.model.rmi;
 
-import com.br.lp3.model.entities.Userlp3;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.JMSConnectionFactory;
-import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageProducer;
@@ -80,11 +71,12 @@ public class Producer implements ProducerLocal {
         gravarArq.printf(message);
         gravarArq.println();
         gravarArq.flush();
-        if(message.contains("Logout"))
+        if (message.contains("Logout")) {
             try {
                 arq.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         sendJMSMessageToBanco(message);
     }

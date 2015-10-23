@@ -24,16 +24,16 @@ public class LogWriter implements LogWriterLocal {
 
     @Override
     public void logWriter() throws IOException, Throwable {
-        formatador = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
         texto = formatador.format(new Date()) + "\tLogout Realizado";
         producer.sendMSGtoQueue(arq,texto);
     }
 
     @Override
     public void logWriter(Userlp3 user) throws IOException {
-        formatador = new SimpleDateFormat("dd-MM-yyyy HH-MM-SS");
+        formatador = new SimpleDateFormat("dd-MM-yyyy HH-mm-SS");
         arq = new FileWriter("c:\\Temp\\log " + formatador.format(new Date()) + ".txt");
-        formatador = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
         texto = formatador.format(new Date()) + (user == null ? "\tTentativa de Login Inválidado\t\tUsuário Inválido" : "\tLogin Realizado\t\tUsuário: " + user.getUsername());
         try {
             producer.sendMSGtoQueue(arq, texto);
@@ -44,7 +44,7 @@ public class LogWriter implements LogWriterLocal {
 
     @Override
     public void logWriter(Double value, Userlp3 receiver, boolean funfo) throws IOException {
-        formatador = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
         texto = formatador.format(new Date()) + (funfo ? "\tTransferência Realizada\t\tReceptor: " + receiver.getUsername() + "\tQuantia: " + value : "\tTentativa de Transferência Inválida");
         try {
             producer.sendMSGtoQueue(arq,texto);
@@ -55,7 +55,7 @@ public class LogWriter implements LogWriterLocal {
 
     @Override
     public void logWriter(Double value, boolean funfo) throws IOException {
-        formatador = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS");
+        formatador = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
         texto = formatador.format(new Date()) + (funfo ? "\tSaque Realizado\t\tQuantia: " + value : "\tTentativa de Saque Inválida\t\tQuantia: " + value);
         try {
             producer.sendMSGtoQueue(arq,texto);
